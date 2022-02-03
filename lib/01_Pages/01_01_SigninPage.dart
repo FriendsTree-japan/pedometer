@@ -39,7 +39,7 @@ class SignInPage extends StatelessWidget {
                                 SizedBox(
                                   width: 120,
                                   child:
-                                  Image.asset('images/FriendsTree.png'),
+                                  Image.asset('images/FriendsTree.jpg'),
                                 ),
                               ],
                             ),
