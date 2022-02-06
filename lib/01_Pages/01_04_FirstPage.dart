@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:health/health.dart';
 import 'package:pedometer/utility/health.dart';
 import '01_05_TodayPage.dart';
+import '01_06_TotalPage.dart';
 
 class FirstPage extends StatefulWidget {
 
@@ -19,14 +20,14 @@ class _FirstPage extends State<FirstPage> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return MaterialApp(
       home: Scaffold(
           body: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text('ようこそ' ,style: TextStyle(fontSize: 40),),
-              Padding(padding:  EdgeInsets.all(50)),
-              //Padding(padding:  EdgeInsets.all(SizeConfig.widgetPaddingSize * 0.20)),
+              Padding(padding:  EdgeInsets.all(SizeConfig.widgetPaddingSize * 2.5)),
               Container(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -38,8 +39,7 @@ class _FirstPage extends State<FirstPage> {
                     ],
                 ),
               ),
-              Padding(padding:  EdgeInsets.all(50)),
-              //Padding(padding:  EdgeInsets.all(SizeConfig.widgetPaddingSize * 0.20)),
+              Padding(padding:  EdgeInsets.all(SizeConfig.widgetPaddingSize * 2.5)),
               ElevatedButton(
                 child: Container(
                   decoration: BoxDecoration(
@@ -59,14 +59,8 @@ class _FirstPage extends State<FirstPage> {
                 ),
                 onPressed: () {
                   if (
-                  activeLocation != 'お住い'
+                  activeLocation == 'お住い'
                   ){
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                TodayPage()));
-                  } else {
                     AlertDialog(
                       title: Text('お住いを選択してください'),
                       actions: [
@@ -75,6 +69,12 @@ class _FirstPage extends State<FirstPage> {
                           onPressed: () => Navigator.pop(context),)
                       ],
                     );
+                  } else {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                TotalPage()));
                 }},
               ),
             ],
