@@ -7,6 +7,8 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '01_05_TodayPage.dart';
 import 'package:pedometer/99_Others/99_Adomob.dart';
 
+import '99_bk.dart';
+
 class TotalPage extends StatefulWidget {
   @override
   State<TotalPage> createState() => _TotalPage();
