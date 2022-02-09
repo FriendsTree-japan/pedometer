@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:health/health.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:pedometer/utility/health.dart';
+import 'package:charts_flutter/flutter.dart' as charts;
+import '99_bk.dart';
 import '01_06_TotalPage.dart';
 
 class TodayPage extends StatefulWidget {
@@ -12,7 +14,7 @@ class TodayPage extends StatefulWidget {
 }
 
 class _TodayPage extends State<TodayPage> {
-
+  int remainingDays = 1;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -126,16 +128,15 @@ class _TodayPage extends State<TodayPage> {
                         child: Text('東京制覇まであと',
                           style: TextStyle(fontSize: 16,color: Colors.black),),
                       ),
-                      Container(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              child: Text('明日ガントチャートに挑戦',
-                                style: TextStyle(fontSize: 22,color: Colors.green),),
-                            ),
-                          ],
-                        ),
+                      Stack(
+                        children: [
+                              SizedBox(
+                                  child: LinearProgressIndicator(
+                                    minHeight: 30.0,
+                                    backgroundColor: Colors.black12,
+                                    value: 0.2,
+                                  )),
+                        ],
                       ),
                       Container(
                         child: Text('5/47都道府県制覇中',

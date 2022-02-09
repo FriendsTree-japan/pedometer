@@ -63,6 +63,13 @@ class _TotalPage extends State<TotalPage> {
                   ),
                 ],
               ),
+              Container(
+                child: CircularProgressIndicator(
+                  strokeWidth: 200,
+                  backgroundColor: Colors.black12,
+                  value: 0.2,
+                ),
+              ),
               Card(
                 margin: const EdgeInsets.all(10.0),
                 //color: Colors.green,

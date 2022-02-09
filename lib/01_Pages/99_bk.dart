@@ -1,55 +1,88 @@
-import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
+import 'package:charts_flutter/flutter.dart' as charts;
 
-class DonutPieChart extends StatelessWidget {
-  final List<charts.Series> seriesList;
+class OrdinalComboBarLineChart extends StatelessWidget {
+  final List<charts.Series<dynamic, String>> seriesList;
   final bool animate;
 
-  DonutPieChart(this.seriesList, {required this.animate});
+  const OrdinalComboBarLineChart(this.seriesList, {this.animate = false});
 
-  /// Creates a [PieChart] with sample data and no transition.
-  factory DonutPieChart.withSampleData() {
-    return new DonutPieChart(
+  factory OrdinalComboBarLineChart.withSampleData() {
+    return OrdinalComboBarLineChart(
       _createSampleData(),
-      // Disable animations for image tests.
       animate: false,
     );
   }
 
-
   @override
   Widget build(BuildContext context) {
-    return new charts.PieChart(seriesList,
+    return charts.OrdinalComboChart(
+        seriesList,
         animate: animate,
-        // Configure the width of the pie slices to 60px. The remaining space in
-        // the chart will be left as a hole in the center.
-        defaultRenderer: new charts.ArcRendererConfig(arcWidth: 60));
+        // Configure the default renderer as a bar renderer.
+        defaultRenderer: charts.BarRendererConfig(
+            groupingType: charts.BarGroupingType.grouped),
+        // Custom renderer configuration for the line series. This will be used for
+        // any series that does not define a rendererIdKey.
+        customSeriesRenderers: [
+          charts.LineRendererConfig(
+            // ID used to link series to this renderer.
+              customRendererId: 'customLine')
+        ]);
   }
 
-  /// Create one series with sample hard coded data.
-  static List<charts.Series<LinearSales, int>> _createSampleData() {
-    final data = [
-      new LinearSales(0, 100),
-      new LinearSales(1, 75),
-      new LinearSales(2, 25),
-      new LinearSales(3, 5),
+  /// Create series list with multiple series
+  static List<charts.Series<OrdinalSales, String>> _createSampleData() {
+    final desktopSalesData = [
+      OrdinalSales('2014', 5),
+      OrdinalSales('2015', 25),
+      OrdinalSales('2016', 100),
+      OrdinalSales('2017', 75),
+    ];
+
+    final tableSalesData = [
+      OrdinalSales('2014', 5),
+      OrdinalSales('2015', 25),
+      OrdinalSales('2016', 100),
+      OrdinalSales('2017', 75),
+    ];
+
+    final mobileSalesData = [
+      OrdinalSales('2014', 10),
+      OrdinalSales('2015', 50),
+      OrdinalSales('2016', 200),
+      OrdinalSales('2017', 150),
     ];
 
     return [
-      new charts.Series<LinearSales, int>(
-        id: 'Sales',
-        domainFn: (LinearSales sales, _) => sales.year,
-        measureFn: (LinearSales sales, _) => sales.sales,
-        data: data,
-      )
+      charts.Series<OrdinalSales, String>(
+          id: 'Desktop',
+          colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
+          domainFn: (OrdinalSales sales, _) => sales.year,
+          measureFn: (OrdinalSales sales, _) => sales.sales,
+          data: desktopSalesData),
+      charts.Series<OrdinalSales, String>(
+          id: 'Tablet',
+          colorFn: (_, __) => charts.MaterialPalette.red.shadeDefault,
+          domainFn: (OrdinalSales sales, _) => sales.year,
+          measureFn: (OrdinalSales sales, _) => sales.sales,
+          data: tableSalesData),
+      charts.Series<OrdinalSales, String>(
+          id: 'Mobile ',
+          colorFn: (_, __) => charts.MaterialPalette.green.shadeDefault,
+          domainFn: (OrdinalSales sales, _) => sales.year,
+          measureFn: (OrdinalSales sales, _) => sales.sales,
+          data: mobileSalesData)
+      // Configure our custom line renderer for this series.
+        ..setAttribute(charts.rendererIdKey, 'customLine'),
     ];
   }
 }
 
-/// Sample linear data type.
-class LinearSales {
-  final int year;
+/// Sample ordinal data type.
+class OrdinalSales {
+  final String year;
   final int sales;
 
-  LinearSales(this.year, this.sales);
+  OrdinalSales(this.year, this.sales);
 }
