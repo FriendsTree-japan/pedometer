@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:health/health.dart';
+import 'package:pedometer/utility/03_07_FireBase.dart';
 import 'package:pedometer/utility/health.dart';
 import '01_05_TodayPage.dart';
 import '01_06_TotalPage.dart';
@@ -57,7 +58,7 @@ class _FirstPage extends State<FirstPage> {
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.all(0),
                 ),
-                onPressed: () {
+                onPressed: () async{
                   if (
                   activeLocation == 'お住い'
                   ){
@@ -70,6 +71,7 @@ class _FirstPage extends State<FirstPage> {
                       ],
                     );
                   } else {
+                    await FirestoreMethod.makePedmeter(activeLocation);
                     Navigator.push(
                         context,
                         MaterialPageRoute(

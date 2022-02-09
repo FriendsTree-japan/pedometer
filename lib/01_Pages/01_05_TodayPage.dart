@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:math';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:health/health.dart';
+import 'package:pedometer/utility/03_07_FireBase.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:pedometer/utility/health.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
@@ -81,38 +83,48 @@ class _TodayPage extends State<TodayPage> {
                 child: Image.asset("images/MtFuji.jpg"),
               ),
               Padding(padding: EdgeInsets.all(20)),
-              Card(
-                margin: const EdgeInsets.all(10.0),
-                //color: Colors.green,
-                child: Container(
-                  margin: const EdgeInsets.all(10.0),
-                  width: 300,
-                  height: 100,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container(
-                        child: Text('本日の合計歩数',
-                          style: TextStyle(fontSize: 16,color: Colors.black),),
-                      ),
-                      Container(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              child: Text(HelthInfo.steps.toString(),
-                                style: TextStyle(fontSize: 28,color: Colors.green),),
-                            ),
-                            Container(
-                              child: Text('歩',
-                                style: TextStyle(fontSize: 12,color: Colors.green),),
-                            ),
-                          ],
+              StreamBuilder<QuerySnapshot>(
+                stream: FirestoreMethod.pedmeterSnapshot(),
+                builder: (context, snapshot) {
+                  return FutureBuilder<Object>(
+                    future: FirestoreMethod.getPedmeter(),
+                    builder: (context, snapshot) {
+                      return Card(
+                        margin: const EdgeInsets.all(10.0),
+                        //color: Colors.green,
+                        child: Container(
+                          margin: const EdgeInsets.all(10.0),
+                          width: 300,
+                          height: 100,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Container(
+                                child: Text('本日の合計歩数',
+                                  style: TextStyle(fontSize: 16,color: Colors.black),),
+                              ),
+                              Container(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      child: Text(FirestoreMethod.todaySteps.toString(),
+                                        style: TextStyle(fontSize: 28,color: Colors.green),),
+                                    ),
+                                    Container(
+                                      child: Text('歩',
+                                        style: TextStyle(fontSize: 12,color: Colors.green),),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
+                      );
+                    }
+                  );
+                }
               ),
               Card(
                 margin: const EdgeInsets.all(10.0),

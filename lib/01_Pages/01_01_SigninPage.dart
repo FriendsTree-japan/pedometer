@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:pedometer/03_FireBase/03_07_FireBase.dart';
+import 'package:pedometer/utility/03_07_FireBase.dart';
 import 'package:pedometer/03_FireBase/03_01_TextDaialog.dart';
 import 'package:pedometer/03_FireBase/03_02_WillPopScope.dart';
 import 'package:pedometer/03_FireBase/03_03_SigninModel.dart';
@@ -94,8 +94,6 @@ class SignInPage extends StatelessWidget {
                                   model.startLoading();
                                   try {
                                     await model.login();
-                                    await FirestoreMethod.getKeyword(model.auth.currentUser!.uid);
-                                    print(FirestoreMethod.getCheck);
                                     await Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(

@@ -8,7 +8,7 @@ import 'package:health/health.dart';
 class HelthInfo {
   List<HealthDataPoint> _healthDataList = [];
   HealthFactory health = HealthFactory();
-  static int? steps;
+  static int? steps = 0;
   static String? meter;
   // define the types to get
   var types = [
