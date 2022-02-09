@@ -7,6 +7,8 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '01_05_TodayPage.dart';
 import 'package:pedometer/99_Others/99_Adomob.dart';
 
+import '99_bk.dart';
+
 class TotalPage extends StatefulWidget {
   @override
   State<TotalPage> createState() => _TotalPage();
@@ -60,6 +62,13 @@ class _TotalPage extends State<TotalPage> {
                     },
                   ),
                 ],
+              ),
+              Container(
+                child: CircularProgressIndicator(
+                  strokeWidth: 200,
+                  backgroundColor: Colors.black12,
+                  value: 0.2,
+                ),
               ),
               Card(
                 margin: const EdgeInsets.all(10.0),
