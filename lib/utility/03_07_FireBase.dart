@@ -13,7 +13,7 @@ class FirestoreMethod {
   static String housing = "住まい";
   static int todaySteps = 0;
   static int sumSteps = 0;
-  static int sumKm = 0;
+  static double sumKm = 0;
 
   static Future<void> makePedmeter(String location) async {
     DateTime now = DateTime.now();
@@ -23,7 +23,6 @@ class FirestoreMethod {
     DateTime midnight = DateTime(now.year, now.month, now.day);
 
     await HelthInfo().fetchStepData(now,midnight);
-    HelthInfo.steps!.toInt()/1290;
     try {
       await pedmeterRef.doc(auth.currentUser!.uid).set({
         'USER_ID': auth.currentUser!.uid,
@@ -64,7 +63,7 @@ class FirestoreMethod {
         plusSteps = todaySteps - zenSteps;
       }
       sumSteps = sumStepsWk + plusSteps;
-      sumKm = _PedmeterDoc.get('SUM_KM');
+      sumKm = (sumSteps/1290 * 100).round()/100;
 
     } catch (e) {
       print('歩数取得に失敗しました --- $e');

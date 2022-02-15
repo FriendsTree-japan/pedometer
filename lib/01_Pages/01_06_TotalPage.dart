@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:health/health.dart';
+import 'package:pedometer/utility/03_07_FireBase.dart';
 import 'package:pedometer/utility/health.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '01_05_TodayPage.dart';
@@ -103,7 +104,7 @@ class _TotalPage extends State<TotalPage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(
-                                child: Text('15,476,881',
+                                child: Text(FirestoreMethod.sumSteps.toString(),
                                   style: TextStyle(fontSize: 28,color: Colors.green),),
                               ),
                               Container(
@@ -150,7 +151,7 @@ class _TotalPage extends State<TotalPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Container(
-                              child: Text('12,000.0',
+                              child: Text(FirestoreMethod.sumKm.toString(),
                                 style: TextStyle(fontSize: 28,color: Colors.green),),
                             ),
                             Container(
