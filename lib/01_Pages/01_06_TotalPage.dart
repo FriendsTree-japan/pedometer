@@ -17,6 +17,7 @@ class TotalPage extends StatefulWidget {
 
 class _TotalPage extends State<TotalPage> {
   String dropdownvalue = '日本一周（約1万2000キロ）';//dropdownvalue変数にItem1をセットする
+  double presentvalue =0.0;
 
   // 変数itemsに配列をセットする
   var items = [
@@ -59,6 +60,26 @@ class _TotalPage extends State<TotalPage> {
                     onChanged: (String? newValue) {
                       setState(() {
                         dropdownvalue = newValue!;
+                        switch (dropdownvalue) {
+                          case '日本一周（約1万2000キロ）':
+                            presentvalue = (FirestoreMethod.sumKm/12000);
+                            break;
+                          case '地球の半径（約6000キロ）':
+                            presentvalue = (FirestoreMethod.sumKm/6000);
+                            break;
+                          case '東京大阪間の往復（約1,000キロ）':
+                            presentvalue = (FirestoreMethod.sumKm/1000);
+                            break;
+                          case '琵琶湖1周（約200キロ）':
+                            presentvalue = (FirestoreMethod.sumKm/200);
+                            break;
+                          case '24時間マラソン（約100キロ）':
+                            presentvalue = (FirestoreMethod.sumKm/100);
+                            break;
+                          case '山手線1周（約35キロ）':
+                            presentvalue = (FirestoreMethod.sumKm/35);
+                            break;
+                        }
                       });
                     },
                   ),
@@ -68,7 +89,7 @@ class _TotalPage extends State<TotalPage> {
                 child: CircularProgressIndicator(
                   strokeWidth: 200,
                   backgroundColor: Colors.black12,
-                  value: 0.2,
+                  value: presentvalue,
                 ),
               ),
               Card(
