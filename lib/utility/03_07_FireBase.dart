@@ -12,6 +12,7 @@ class FirestoreMethod {
       Firebase_Auth.FirebaseAuth.instance;
   static String housing = "住まい";
   static int todaySteps = 0;
+  static double todayKm = 0;
   static int sumSteps = 0;
   static double sumKm = 0;
 
@@ -31,6 +32,7 @@ class FirestoreMethod {
         'SUM_STEPS': HelthInfo.steps!.toInt(),
         'SUM_KM': sumKm,
         'ZEN_STEPS_DATE': today,
+        'PRESENT_VALUE':location
       });
     } catch (e) {
       print('ユーザー登録に失敗しました --- $e');
@@ -49,12 +51,14 @@ class FirestoreMethod {
      int plusSteps = 0;
      int zenSteps = 0;
      zenSteps = _PedmeterDoc.get('TODAY_STEPS');
+     String presentValue = _PedmeterDoc.get('PRESENT_VALUE');
 
     await HelthInfo().fetchStepData(now,midnight);
 
     try {
       housing = _PedmeterDoc.get('HOUSING');
       todaySteps = HelthInfo.steps!.toInt();
+      todayKm = (todaySteps/1290 * 100).round()/100;
       int sumStepsWk = _PedmeterDoc.get('SUM_STEPS');
 
       if(today.compareTo(zenStepDatewk) == 1){
@@ -76,6 +80,7 @@ class FirestoreMethod {
         'SUM_STEPS': sumSteps,
         'SUM_KM': sumKm,
         'ZEN_STEPS_DATE': today,
+        'PRESENT_VALUE':presentValue
       });
     } catch (e) {
       print('ユーザー登録に失敗しました --- $e');
