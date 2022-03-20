@@ -33,7 +33,12 @@ class _TotalPage extends State<TotalPage> {
     return MaterialApp(
       home: Scaffold(
           appBar: AppBar(
-            leading: BackButton(
+            title: Text(
+              '制覇した都道府県',
+              style: TextStyle(color: Colors.black),
+            ),
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back),
               onPressed: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => TodayPage()));

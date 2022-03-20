@@ -17,17 +17,18 @@ class SignUpPage extends StatefulWidget {
   late String password;
   late String confirm;
 
-  SignUpPage.make(){
-  }
+  SignUpPage.make() {}
 
-  SignUpPage.modoru(this.mail, this.password, this.confirm){
+  SignUpPage.modoru(this.mail, this.password, this.confirm) {
     this.mailController = TextEditingController(text: this.mail);
     this.passwordController = TextEditingController(text: this.password);
     this.confirmController = TextEditingController(text: this.confirm);
   }
+
   @override
   _SignUpPageState createState() => _SignUpPageState();
 }
+
 class _SignUpPageState extends State<SignUpPage> {
   //ページ1より
   var mailController = TextEditingController();
@@ -77,12 +78,13 @@ class _SignUpPageState extends State<SignUpPage> {
                                   child: Column(
                                     children: <Widget>[
                                       Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
                                         children: [
                                           SizedBox(
                                             width: 120,
-                                            child:
-                                            Image.asset('images/FriendsTree.png'),
+                                            child: Image.asset(
+                                                'images/FriendsTree.png'),
                                           ),
                                         ],
                                       ),
@@ -141,18 +143,19 @@ class _SignUpPageState extends State<SignUpPage> {
                                       ),
                                       Column(
                                         mainAxisAlignment:
-                                        MainAxisAlignment.center,
+                                            MainAxisAlignment.center,
                                         crossAxisAlignment:
-                                        CrossAxisAlignment.center,
+                                            CrossAxisAlignment.center,
                                         children: [
                                           Row(
                                             mainAxisAlignment:
-                                            MainAxisAlignment.start,
+                                                MainAxisAlignment.start,
                                             children: [
                                               SizedBox(
                                                 width: 24,
                                                 child: Checkbox(
-                                                  activeColor: Color(0xFF4CAF50),
+                                                  activeColor:
+                                                      Color(0xFF4CAF50),
                                                   checkColor: Colors.white,
                                                   onChanged: (val) {
                                                     model.tapAgreeCheckBox(val);
@@ -169,22 +172,26 @@ class _SignUpPageState extends State<SignUpPage> {
                                                     style: TextStyle(
                                                       color: Colors.grey,
                                                       fontSize: 12.0,
-                                                      fontWeight: FontWeight.bold,
+                                                      fontWeight:
+                                                          FontWeight.bold,
                                                     ),
                                                     children: [
                                                       TextSpan(
                                                         text: '利用規約',
                                                         style: TextStyle(
-                                                          color: Color(0xFF4CAF50),
-                                                          decoration: TextDecoration
-                                                              .underline,
-                                                          decorationThickness: 2.00,
+                                                          color:
+                                                              Color(0xFF4CAF50),
+                                                          decoration:
+                                                              TextDecoration
+                                                                  .underline,
+                                                          decorationThickness:
+                                                              2.00,
                                                         ),
                                                         recognizer:
-                                                        TapGestureRecognizer()
-                                                          ..onTap = () {
-                                                            _SignUprulesURL();
-                                                          },
+                                                            TapGestureRecognizer()
+                                                              ..onTap = () {
+                                                                _SignUprulesURL();
+                                                              },
                                                       ),
                                                       TextSpan(
                                                           text: ' を読んで同意しました。'),
@@ -198,29 +205,34 @@ class _SignUpPageState extends State<SignUpPage> {
                                             children: [
                                               FloatingActionButton.extended(
                                                 shape: RoundedRectangleBorder(
-                                                  borderRadius: BorderRadius.circular(5), //角の丸み
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          5), //角の丸み
                                                 ),
                                                 label: Text('新規登録'),
                                                 backgroundColor:
-                                                const Color(0xFF4CAF50),
+                                                    const Color(0xFF4CAF50),
                                                 onPressed: model.agreeGuideline
                                                     ? () async {
-                                                  try {
-                                                    await model.signUp();
-                                                    await Navigator
-                                                        .pushReplacement(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            FirstPage(),
-                                                      ),
-                                                    );
-                                                    model.endLoading();
-                                                  } catch(e){
-                                                    showTextDialog(
-                                                        context, e);
-                                                    model.endLoading();
-                                                  }} : null,
+                                                        try {
+                                                          await model.signUp();
+                                                          await Navigator
+                                                              .pushReplacement(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                              builder:
+                                                                  (context) =>
+                                                                      FirstPage(),
+                                                            ),
+                                                          );
+                                                          model.endLoading();
+                                                        } catch (e) {
+                                                          showTextDialog(
+                                                              context, e);
+                                                          model.endLoading();
+                                                        }
+                                                      }
+                                                    : null,
                                               ),
                                               FlatButton(
                                                 child: Text(
@@ -231,7 +243,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                                   Navigator.pushReplacement(
                                                     context,
                                                     MaterialPageRoute(
-                                                      builder: (context) => SignInPage(),
+                                                      builder: (context) =>
+                                                          SignInPage(),
                                                     ),
                                                   );
                                                 },
@@ -240,10 +253,12 @@ class _SignUpPageState extends State<SignUpPage> {
                                           ),
                                         ],
                                       ),
-                                    ],),
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),],
+                            ),
+                          ],
                         ),
                       ],
                     ),

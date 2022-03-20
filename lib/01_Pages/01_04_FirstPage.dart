@@ -71,12 +71,14 @@ class _FirstPage extends State<FirstPage> {
                       ],
                     );
                   } else {
+                    await FirestoreMethod().todofukenHenkanMethod(activeLocation);
                     await FirestoreMethod.makePedmeter(activeLocation);
+                    await FirestoreMethod.getPedometer_manage();
                     Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                TotalPage()));
+                                TodayPage()));
                 }},
               ),
             ],

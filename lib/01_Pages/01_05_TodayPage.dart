@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:health/health.dart';
 import 'package:pedometer/utility/03_07_FireBase.dart';
+import 'package:pedometer/utility/03_otherMethod.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:pedometer/utility/health.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
@@ -18,6 +19,14 @@ class TodayPage extends StatefulWidget {
 class _TodayPage extends State<TodayPage> {
   int remainingDays = 1;
 
+  // late String PresentValue;
+  // late String NextPresentValue ="";
+  // @override
+  // void initState() {
+  //   PresentValue = OtherMethod().todofukenHenkanMethod(FirestoreMethod.PresentV);
+  //   NextPresentValue = OtherMethod().todofukenHenkanMethod(FirestoreMethod.PrezentVnextPrefectures);
+  // }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -29,7 +38,7 @@ class _TodayPage extends State<TodayPage> {
             ),
             actions: [
               IconButton(
-                icon: Icon(Icons.navigate_next_outlined),
+                icon: Icon(Icons.account_circle_outlined),
                 onPressed: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => TotalPage()));
@@ -99,7 +108,7 @@ class _TodayPage extends State<TodayPage> {
                                               CrossAxisAlignment.center,
                                           children: [
                                             Text('現在地：'),
-                                            Text('東京都'),
+                                            Text(FirestoreMethod.PresentValue),
                                           ],
                                         ),
                                       ),
@@ -126,7 +135,7 @@ class _TodayPage extends State<TodayPage> {
                                 children: [
                                   Container(
                                     child: Text(
-                                      '日本1周まであと',
+                                      '${FirestoreMethod.PresentValue}制覇まであと',
                                       style: TextStyle(
                                           fontSize: 14, color: Colors.black),
                                     ),
@@ -138,7 +147,7 @@ class _TodayPage extends State<TodayPage> {
                                         minHeight: 40.0,
                                         color: Colors.black,
                                         backgroundColor: Colors.white,
-                                        value: 0.2,
+                                        value: FirestoreMethod.ProgressRate,
                                       )),
                                     ],
                                   ),
@@ -156,7 +165,7 @@ class _TodayPage extends State<TodayPage> {
                                               color: Colors.black),
                                         ),
                                         Text(
-                                          '神奈川',
+                                          FirestoreMethod.NextPresentValue,
                                           style: TextStyle(
                                               fontSize: 14,
                                               color: Colors.black),

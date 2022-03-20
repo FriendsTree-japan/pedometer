@@ -7,6 +7,7 @@ import 'package:pedometer/03_FireBase/03_03_SigninModel.dart';
 import '01_02_SignupPage.dart';
 import '01_03_PasswordForgetPage.dart';
 import '01_04_FirstPage.dart';
+import '01_05_TodayPage.dart';
 
 class SignInPage extends StatelessWidget {
   final mailController = TextEditingController();
@@ -94,10 +95,12 @@ class SignInPage extends StatelessWidget {
                                   model.startLoading();
                                   try {
                                     await model.login();
+                                    await FirestoreMethod.getPresentValue();
+                                    await FirestoreMethod.getPedometer_manage();
                                     await Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => FirstPage(),
+                                        builder: (context) => TodayPage(),
                                       ),
                                     );
                                   } catch (e) {
