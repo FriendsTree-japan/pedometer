@@ -10,6 +10,7 @@ import 'package:pedometer/utility/health.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import '99_bk.dart';
 import '01_06_TotalPage.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class TodayPage extends StatefulWidget {
   @override
@@ -18,6 +19,7 @@ class TodayPage extends StatefulWidget {
 
 class _TodayPage extends State<TodayPage> {
   int remainingDays = 1;
+  CarouselController _carouselController = CarouselController();
 
   // late String PresentValue;
   // late String NextPresentValue ="";
@@ -26,7 +28,6 @@ class _TodayPage extends State<TodayPage> {
   //   PresentValue = OtherMethod().todofukenHenkanMethod(FirestoreMethod.PresentV);
   //   NextPresentValue = OtherMethod().todofukenHenkanMethod(FirestoreMethod.PrezentVnextPrefectures);
   // }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -112,9 +113,59 @@ class _TodayPage extends State<TodayPage> {
                                           ],
                                         ),
                                       ),
-                                      Container(
-                                          child:
-                                              Image.asset("images/MtFuji.jpg")),
+                                      CarouselSlider(
+                                        options: CarouselOptions(
+                                          autoPlay: true,
+                                          viewportFraction: 1.0,
+                                          autoPlayAnimationDuration: const Duration(seconds: 1)
+                                        ),
+                                        items:
+                                            FirestoreMethod.imageUrls.map((i) {
+                                          return Builder(
+                                            builder: (BuildContext context) {
+                                              return Image.network(
+                                                i,
+                                                fit: BoxFit.cover,
+                                                width: 350,
+                                                height: 200,
+                                              );
+                                            },
+                                          );
+                                        }).toList(),
+                                      )
+                                      // child: CarouselSlider(
+                                      //   items: [ Container(
+                                      //       child:
+                                      //       Image.network(
+                                      //         FirestoreMethod.imageUrls[0],
+                                      //         fit: BoxFit.cover,
+                                      //         width: 300,
+                                      //         height: 200,)),
+                                      //     Container(
+                                      //         child:
+                                      //         Image.network(
+                                      //           FirestoreMethod.imageUrls[1],
+                                      //           fit: BoxFit.cover,
+                                      //           width: 300,
+                                      //           height: 200,)),
+                                      //     Container(
+                                      //         child:
+                                      //         Image.network(
+                                      //           FirestoreMethod.imageUrls[2],
+                                      //           fit: BoxFit.cover,
+                                      //           width: 300,
+                                      //           height: 200,)),
+                                      //   ],
+                                      //   carouselController: _carouselController,
+                                      //   options: CarouselOptions(
+                                      //     enlargeCenterPage:true,
+                                      //     autoPlay: true,
+                                      //   ),
+                                      // ),
+
+                                      // Container(
+                                      //     child:
+                                      //             Image.network(FirestoreMethod.imageUrls[0], fit: BoxFit.cover, width: 300,height: 200,)),
                                     ],
                                   ),
                                 ),

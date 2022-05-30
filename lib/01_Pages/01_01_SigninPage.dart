@@ -97,6 +97,8 @@ class SignInPage extends StatelessWidget {
                                     await model.login();
                                     await FirestoreMethod.getPresentValue();
                                     await FirestoreMethod.getPedometer_manage();
+                                    //ダウンロードテスト
+                                    // await FirestoreMethod().downloadImage();
                                     await Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
